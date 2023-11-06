@@ -1,23 +1,31 @@
-"use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/blog.module.css";
 
-const Blog = () => {
-  const [blogs, setBlogs] = useState([]);
+const Blog = async () => {
+  const fetchData = async () => {
+  const blogs = await fetch("http://localhost:3000/api/blogs").then(
+    (response) => response.json()
+  );
+  return blogs.message
+};
 
-  useEffect(() => {
-    console.log("Running effect from all blogs page");
-    fetch("http://localhost:3000/api/blogs")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Data received:", data);
-        setBlogs(data.message);
-      })
-      .catch((error) => {
-        console.error("Error occurred:", error);
-      });
-  }, []);
+const blogs= await fetchData()
+
+  // const [blogs, setBlogs] = useState([]);
+  // console.log(props)
+  // useEffect(() => {
+  //   console.log("Running effect from all blogs page");
+  //   fetch("http://localhost:3000/api/blogs")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("Data received:", data);
+  //       setBlogs(data.message);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error occurred:", error);
+  //     });
+  // }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center">
@@ -38,5 +46,12 @@ const Blog = () => {
     </main>
   );
 };
+// export async function getServerSideProps() {
+//   // Fetch data from external API
+//   // const res = await fetch(`https://.../data`)
+//   // const data = await res.json()
 
+//   // Pass data to the page via props
+//   return { props: { data } }
+// }
 export default Blog;
