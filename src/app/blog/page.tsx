@@ -34,7 +34,7 @@ const blogs= await fetchData()
         <h2 className={" font-bold p-10"}>All Blogs</h2>
       </div>
       <div className="flex items-center justify-between font-mono text-sm ">
-        {blogs.map((blogData, index) => (
+        {blogs.map((blogData: { slug: any; title: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; content: string; author: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }, index: React.Key | null | undefined) => (
           <div className={`${styles.blogItem}`} key={index}>
             <Link href={`/blog/${blogData?.slug}`}>
               <h2 className="font-bold pb-3">{blogData?.title}</h2>
