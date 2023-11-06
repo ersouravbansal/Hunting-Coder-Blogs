@@ -1,17 +1,23 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import Script from "next/script";
-export default function Home() {
+export default async function Home() {
+  const fetchData = async () => {
+    const blogs = await fetch("http://localhost:3000/api/blogs").then(
+      (response) => response.json()
+    );
+    return blogs.message
+  };
+  
+  const blogs= await fetchData()
   return (
     <>
       <style jsx>{`
         .myImg {
         }
-        h2 {
-          font-size: 36px;
-        }
         h3 {
-          font-size: 20px;
+          font-size: 16px;
         }
         .mySpan {
           background: rgb(238, 238, 251);
@@ -45,8 +51,19 @@ export default function Home() {
         </div>
 
         <div className="blogs">
-          <h2 className="font-bold gradi">Popular Blogs</h2>
-          <div className="blogItem">
+          <h2 className="font-bold gradi pb-3 pt-2">Popular Blogs</h2>
+          <div className="flex items-center justify-between font-mono text-sm ">
+        {blogs.map((blogData: { slug: any; title: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; content: string; author: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }, index: React.Key | null | undefined) => (
+          <div className={`blogcard`} key={index}>
+            <Link href={`/blog/${blogData?.slug}`}>
+              <h2 className="font-bold pb-3">{blogData?.title}</h2>
+            </Link>
+            <p>{blogData?.content.substr(0, 400)}</p>
+            <div className="pt-3">Author: {blogData?.author}</div>
+          </div>
+        ))}
+      </div>
+          {/* <div className="blogItem">
             <h3 className="font-bold">How To Learn Javascript</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -77,7 +94,7 @@ export default function Home() {
               Voluptates, dolorem rerum, quidem aspernatur iure, eos odit ut
               error fugit eveniet blanditiis. Blanditiis tempora maxime sunt.
             </p>
-          </div>
+          </div> */}
         </div>
       </main>
       <Script src="script.js" strategy="lazyOnload"></Script>
