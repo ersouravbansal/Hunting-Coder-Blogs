@@ -27,11 +27,11 @@ const Blog = () => {
       <div className="flex items-center justify-between font-mono text-sm ">
         {blogs.map((blogData, index) => (
           <div className={`${styles.blogItem}`} key={index}>
-            <Link href={`/blog/${blogData.slug}`}>
-              <h2 className="font-bold pb-3">{blogData.title}</h2>
+            <Link href={`/blog/${blogData?.slug}`}>
+              <h2 className="font-bold pb-3">{blogData?.title}</h2>
             </Link>
-            <p>{blogData.content.substr(0, 400)}</p>
-            <div className="pt-3">Author: {blogData.author}</div>
+            <p>{blogData?.content.substr(0, 400)}</p>
+            <div className="pt-3">Author: {blogData?.author}</div>
           </div>
         ))}
       </div>
