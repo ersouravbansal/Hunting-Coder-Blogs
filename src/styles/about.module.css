@@ -1,0 +1,25 @@
+.container{
+  width: 100%;
+  background-color: wheat;
+}
+.heading_about {
+  padding: 10px 0px;
+  font-size: 24px;
+  color: green;
+}
+.center_align {
+  text-align: center;
+}
+.flex_item{
+    display: flex;
+}
+.column1{
+  width: 70%;
+}
+.column2{
+    width: 30%;
+
+}
+.row{
+  padding: 5px;
+}
