@@ -7,10 +7,10 @@ export default async function Home() {
     const blogs = await fetch("http://localhost:3000/api/blogs").then(
       (response) => response.json()
     );
-    return blogs.message
+    return blogs.message;
   };
-  
-  const blogs= await fetchData()
+
+  const blogs = await fetchData();
   return (
     <>
       <style jsx>{`
@@ -51,18 +51,23 @@ export default async function Home() {
         </div>
 
         <div className="blogs">
-          <h2 className="font-bold gradi pb-3 pt-2">Popular Blogs</h2>
+          <h2 className="font-bold gradi pb-3 pt-2 ">Popular Blogs</h2>
           <div className="flex items-center justify-between font-mono text-sm ">
-        {blogs.map((blogData: { slug: any; title: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; content: string; author: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }, index: React.Key | null | undefined) => (
-          <div className={`blogcard`} key={index}>
-            <Link href={`/blog/${blogData?.slug}`}>
-              <h2 className="font-bold pb-3">{blogData?.title}</h2>
-            </Link>
-            <p>{blogData?.content.substr(0, 400)}</p>
-            <div className="pt-3">Author: {blogData?.author}</div>
+            {blogs.map(
+              (
+                blogData: any,
+                index: React.Key | null | undefined
+              ) => (
+                <div className={`blogcard`} key={index}>
+                  <Link href={`/blog/${blogData?.slug}`}>
+                    <h2 className="font-bold pb-3">{blogData?.title}</h2>
+                  </Link>
+                  <p>{blogData?.content.substr(0, 400)}</p>
+                  <div className="pt-3">Author: {blogData?.author}</div>
+                </div>
+              )
+            )}
           </div>
-        ))}
-      </div>
           {/* <div className="blogItem">
             <h3 className="font-bold">How To Learn Javascript</h3>
             <p>
